@@ -13,22 +13,23 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   login: Login = {
-    EmailId: "",
-    Password: ""
+    email: "",
+    password: ""
   }
 
-  constructor(private authService:AuthService, private routes: Router){}
+  constructor(private authService:AuthService, private router: Router){}
 
   onLogin(){
     this.authService.login(this.login).subscribe({
       next: (res:any)=> {
-        if(res.result){
+        if(res.access_token){
           console.log(res)
-          alert("Login funcionou")
-          this.routes.navigateByUrl('')
+          alert("Login Funcionou")
+          this.router.navigateByUrl('')
         }else{
           alert(res.message)
         }
+          
       }
     })
   }

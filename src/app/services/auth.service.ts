@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Login } from '../models/login';
 @Injectable({
@@ -7,12 +7,14 @@ import { Login } from '../models/login';
 })
 export class AuthService {
 
-  url = "https://freeapi.miniprojectideas.com/api/User/"
+  url = "https://api.escuelajs.co/api/v1/auth/login"
 
+
+  
   constructor(private httpClient: HttpClient) { }
 
   login(login:Login):Observable<Login> {
-    return this.httpClient.post<Login>(this.url+"login", login)
+    return this.httpClient.post<Login>(this.url+"login",login)
   }
 
 }
