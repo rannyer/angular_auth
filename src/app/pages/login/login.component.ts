@@ -22,15 +22,11 @@ export class LoginComponent {
   onLogin(){
     this.authService.login(this.login).subscribe({
       next: (res:any)=> {
-        if(res.access_token){
           console.log(res)
           alert("Login Funcionou")
-          this.router.navigateByUrl('')
-        }else{
-          alert(res.message)
-        }
-          
-      }
+          this.router.navigateByUrl('')  
+      },
+      error: (res:any) => alert("Senha ou usuário inválidos")
     })
   }
 

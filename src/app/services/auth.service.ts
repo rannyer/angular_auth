@@ -7,7 +7,7 @@ import { Login } from '../models/login';
 })
 export class AuthService {
 
-  url = "https://api.escuelajs.co/api/v1/auth/login"
+  url = "https://api.escuelajs.co/api/v1/auth/"
 
 
   
