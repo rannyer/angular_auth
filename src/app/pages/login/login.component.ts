@@ -23,10 +23,10 @@ export class LoginComponent {
     this.authService.login(this.login).subscribe({
       next: (res:any)=> {
           console.log(res)
-          alert("Login Funcionou")
+          localStorage.setItem("token_angular", res.access_token)
           this.router.navigateByUrl('')  
       },
-      error: (res:any) => alert("Senha ou usuário inválidos")
+      error: () => alert("Senha ou usuário inválidos")
     })
   }
 
