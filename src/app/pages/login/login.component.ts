@@ -24,12 +24,11 @@ export class LoginComponent {
 
     this.authService.login(this.login).subscribe({
       next: (res:any)=> {
-          console.log(res)
+  
           localStorage.setItem("token_angular", res.access_token)
-          const token = localStorage.getItem("token_angular")
-          const decodeToken = jwtDecode(token!)
-          console.log(decodeToken)
-          this.router.navigateByUrl('')  
+          const route = localStorage.getItem('redirectUrl') || ''
+          localStorage.removeItem('redirectUrl')
+          this.router.navigateByUrl(route)  
       },
       error: () => alert("Senha ou usuário inválidos")
     })

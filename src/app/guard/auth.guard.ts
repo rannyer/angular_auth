@@ -6,14 +6,16 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   const router = inject(Router)
 
+  
   const localToken = localStorage.getItem("token_angular")
-  const decodedToken =  jwtDecode(localToken!)
   if (localToken != null) {
-    
-    console.log(decodedToken)
+    // const decodedToken =  jwtDecode(localToken!)
+    // console.log(decodedToken)
     return true
 
   } else {
+
+    localStorage.setItem("redirectUrl", state.url)
 
     router.navigateByUrl("login")
     return false
