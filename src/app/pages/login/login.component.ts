@@ -2,7 +2,7 @@ import { Component, inject, NgModule } from '@angular/core';
 import { Login } from '../../models/login';
 import {FormsModule} from '@angular/forms'
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {jwtDecode} from 'jwt-decode'
 
 @Component({
@@ -18,7 +18,7 @@ export class LoginComponent {
     password: ""
   }
 
-  constructor(private authService:AuthService, private router: Router){}
+  constructor(private authService:AuthService, private router: Router, private route: ActivatedRoute){}
 
   onLogin(){
 
@@ -26,8 +26,10 @@ export class LoginComponent {
       next: (res:any)=> {
   
           localStorage.setItem("token_angular", res.access_token)
-          const route = localStorage.getItem('redirectUrl') || ''
-          localStorage.removeItem('redirectUrl')
+          // const route = localStorage.getItem('redirectUrl') || ''
+          // localStorage.removeItem('redirectUrl')
+          const route = this.route.snapshot.queryParamMap.get('stateUrl') || ''
+          console.log(route)
           this.router.navigateByUrl(route)  
       },
       error: () => alert("Senha ou usuário inválidos")
